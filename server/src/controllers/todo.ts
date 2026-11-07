@@ -9,7 +9,7 @@ export const createNewTodo = async (req: Request , res : Response) =>{
         });
         res.status(201).json({
             message : "New Todo Added!",
-            data : newTodo
+            todos : newTodo
         })
     } catch (error) {
         console.log(error);
@@ -24,7 +24,7 @@ export const getTodos = async (req : Request, res : Response) =>{
         const todos  = await Todo.find();
         res.status(201).json({
             message : "All Todo",
-            data : todos
+            todos : todos
         })
     } catch (error) {
         console.log(error);
@@ -40,7 +40,7 @@ export const getTodo = async (req : Request, res : Response) =>{
         const todo  = await Todo.findById(TodoID);
         res.status(200).json({
             message : "Single Todo",
-            data : todo
+            todo : todo
         })
     } catch (error) {
         console.log(error);
@@ -73,7 +73,7 @@ export const updateTodo = async (req : Request, res : Response) =>{
 
         res.status(200).json({
             message : "Single Todo Updated",
-            data : updated
+            todo : updated
         })
     } catch (error) {
         console.log(error);
