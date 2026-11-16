@@ -82,7 +82,7 @@ const NoteList = () => {
                 </div>
 
                 {/* Note list */}
-                <div className="mb-6">
+                <div className="mb-6">  
                     <div className="flex items-center gap-2 mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -99,9 +99,8 @@ const NoteList = () => {
                         {notes.map((note) => (
                             <li
                                 key={note._id}
-                                className={`group flex items-center justify-between p-3 bg-white rounded-xl shadow-sm border border-slate-100 transition-all duration-150 hover:shadow-md hover:border-emerald-200 hover:-translate-y-0.5 ${
-                                    editId === note._id ? "ring-2 ring-emerald-300 border-emerald-300" : ""
-                                }`}
+                                className={`group flex items-center justify-between p-3 bg-white rounded-xl shadow-sm border border-slate-100 transition-all duration-150 hover:shadow-md hover:border-emerald-200 hover:-translate-y-0.5 ${editId === note._id ? "ring-2 ring-emerald-300 border-emerald-300" : ""
+                                    }`}
                             >
                                 <span className="text-slate-800 font-medium truncate pr-3">
                                     {note.title}
