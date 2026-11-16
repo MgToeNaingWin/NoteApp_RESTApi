@@ -6,5 +6,5 @@ const router = Router();
 router.post("/register", UserRegister);
 router.post("/login", Userlogin);
 router.post("/logout", Userlogout);
-router.route("/profile").get(protect,getUserProfile).put(updateUserProfile)
+router.route("/profile").get(protect,getUserProfile).put(protect,updateUserProfile)
 export default router;

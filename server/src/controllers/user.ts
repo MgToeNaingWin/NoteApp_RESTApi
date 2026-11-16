@@ -4,6 +4,8 @@ import { User } from "../models/user.js";
 import generateToken from "../utils/generatoken.js";
 import errorHandler from "../middleware/errorHandler.js";
 import asyncHandler from "../utils/asyncHandler.js";
+import type { AuthRequest } from "../middleware/authMiddleware.js";
+import { Error } from "mongoose";
 
 export const UserRegister =asyncHandler( async (req: Request , res : Response) =>{
     const {name, email , password} = req.body;
@@ -67,14 +69,36 @@ export const Userlogout = asyncHandler(async (req: Request , res : Response) =>{
     })
 });
 
-export const getUserProfile  = asyncHandler(async (req : Request, res : Response) =>{
+export const getUserProfile  = asyncHandler(async (req : AuthRequest, res : Response) =>{
+    const user = {
+        _id : req.user?._id,
+        name :req.user?.name,
+        email : req.user?.email
+    }
     res.status(200).json({
-        message : "User Profile"
+        message : "User Profile",
+        user
     })
 });
 
-export const updateUserProfile  = asyncHandler(async (req : Request, res : Response) =>{
+export const updateUserProfile  = asyncHandler(async (req : AuthRequest, res : Response) =>{
+    const  user = await User.findById(req.user?._id);
+    if(!user){
+        res.status(404);
+        throw new Error("User Not Found");
+    }
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.password = req.body.password || user.password;
+    const updatedUser =await user.save();
+    const selectUser = {
+        _id : updatedUser._id,
+        name : updatedUser.name,
+        email : updatedUser.email
+    }
+
     res.status(200).json({
-        message : "Update User Profile"
+        message : "Update User Profile",
+        selectUser
     })
 });
